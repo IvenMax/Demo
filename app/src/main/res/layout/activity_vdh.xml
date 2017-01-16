@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.iven.app.activity.VDHActivity">
+
+    <com.iven.app.view.viewdrag.ViewDragLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="300px"
+            android:layout_height="300px"
+            android:layout_marginLeft="20px"
+            android:background="@color/colorAccent_translate"
+            android:gravity="center"
+            android:text="I can go home"
+            />
+        <!--<ListView-->
+            <!--android:id="@+id/vdh_listview"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:divider="@color/color_429ae6"-->
+            <!--android:dividerHeight="@dimen/value_1_px"-->
+            <!--android:overScrollMode="never">-->
+        <!--</ListView>-->
+    </com.iven.app.view.viewdrag.ViewDragLayout>
+</LinearLayout>

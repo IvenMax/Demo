@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_dialog_util"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.iven.app.activity.DialogUtilActivity">
+    <Button
+        android:id="@+id/btn_info_dialog"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="提示信息的Dialog"
+        android:visibility="visible"/>
+    <Button
+        android:id="@+id/btn_et_dialog"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="输入框的Dialog"
+        android:visibility="visible"/>
+</LinearLayout>

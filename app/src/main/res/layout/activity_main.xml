@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.iven.app.MainActivity">
+    <Button
+        android:id="@+id/btn_dialog"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="DialogUtils"
+        android:visibility="visible"/>
+    <Button
+        android:id="@+id/btn_version"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="版本更新"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/btn_vdh"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="VDH"
+        android:visibility="visible"/>
+    <Button
+        android:id="@+id/btn_lv_slide"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="DragHelper实现ListView侧滑删除"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/btn_pulltoresresh"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="PullToRefreshLayout"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:src="@mipmap/circle"/>
+</LinearLayout>

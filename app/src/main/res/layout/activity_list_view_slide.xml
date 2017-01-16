@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_list_view_slide"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.iven.app.activity.ListViewSlideActivity">
+
+    <ListView
+        android:id="@+id/lv_slide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/part_line"
+        android:dividerHeight="@dimen/value_1_px"
+        android:layoutAnimation="@anim/navagation_gridview_anim"
+        android:listSelector="@android:color/transparent"
+        android:overScrollMode="never"
+        android:visibility="visible"/>
+
+
+</RelativeLayout>
