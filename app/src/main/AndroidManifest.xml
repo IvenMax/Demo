@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".activity.DialogUtilActivity">
         </activity>
+        <activity android:name=".activity.NoticeViewActivity">
+        </activity>
     </application>
 
 </manifest>
