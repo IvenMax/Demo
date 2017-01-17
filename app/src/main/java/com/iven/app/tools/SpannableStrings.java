@@ -75,6 +75,23 @@ public class SpannableStrings {
     }
 
     /**
+     * 设置部分文本的背景色和字体颜色
+     *
+     * @param text            文本
+     * @param backgroundColor 背景色
+     * @param textColor       文本色
+     * @param backgroundArr   背景色设置文本位置
+     * @param textColorArr    文本颜色位置
+     * @return SpannableString
+     */
+    public static SpannableString setTextBackgroundAndTextColor(String text, int backgroundColor, int textColor, int[] backgroundArr, int[] textColorArr) {
+        SpannableString spannableString = new SpannableString(text);
+        spannableString.setSpan(new BackgroundColorSpan(backgroundColor), backgroundArr[0], backgroundArr[1], Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(textColor), textColorArr[0], textColorArr[1], Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
+    }
+
+    /**
      * 设置部分文本的字体颜色
      *
      * @param text      文本

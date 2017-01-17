@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.iven.app.activity.DialogUtilActivity;
 import com.iven.app.activity.ListViewSlideActivity;
+import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
 import com.iven.app.activity.UpdateVersionActivity;
 import com.iven.app.activity.VDHActivity;
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     public void btnClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            case R.id.btn_jingdong:
+                intent.setClass(this, NoticeViewActivity.class);
+                break;
             case R.id.btn_version:
                 intent.setClass(this, UpdateVersionActivity.class);
                 break;
