@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         iv_circle = (ImageView) findViewById(R.id.iv_circle);
+        iv_circle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startAnim();
+            }
+        });
     }
 
     public void btnClick(View view) {

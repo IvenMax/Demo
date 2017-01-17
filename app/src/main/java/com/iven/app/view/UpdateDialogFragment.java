@@ -120,6 +120,7 @@ public class UpdateDialogFragment extends DialogFragment {
         dialogWindow.setAttributes(p);
         mDialog.setCanceledOnTouchOutside(false);//外部禁止点击
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -145,6 +146,7 @@ public class UpdateDialogFragment extends DialogFragment {
     public void onDestroy() {
         super.onDestroy();
     }
+
     public interface DialogClickListener {
 
         /**

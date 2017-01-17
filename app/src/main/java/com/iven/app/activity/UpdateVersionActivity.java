@@ -27,7 +27,7 @@ public class UpdateVersionActivity extends AppCompatActivity {
 
     private void showUpdateDialog() {
         String content = "1.修复xxx Bug;\\n2.更新UI界面.";
-        String apkUrl="https://dbank.qrcb.com.cn/web/bao/Dbank_app_android.apk";
+        String apkUrl = "https://dbank.qrcb.com.cn/web/bao/Dbank_app_android.apk";
         final UpdateDialogFragment dialogFragment = new UpdateDialogFragment("title", content, "取消", "更新", new UpdateDialogFragment.DialogClickListener() {
             @Override
             public void leftEvent() {

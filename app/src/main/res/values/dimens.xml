@@ -9,8 +9,11 @@
     <dimen name="value_24_px">24px</dimen>
     <dimen name="value_40_px">40px</dimen>
     <dimen name="value_80_px">80px</dimen>
+    <dimen name="value_120_px">120px</dimen>
     <dimen name="value_30_dp">30dp</dimen>
     <dimen name="value_60_px">60px</dimen>
     <dimen name="value_50_px">50px</dimen>
     <dimen name="value_4_px">4px</dimen>
+    <dimen name="value_600_px">600px</dimen>
+    <dimen name="value_56_px">56px</dimen>
 </resources>
