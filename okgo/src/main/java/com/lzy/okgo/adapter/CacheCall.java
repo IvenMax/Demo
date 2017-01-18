@@ -1,6 +1,7 @@
 package com.lzy.okgo.adapter;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -161,6 +162,7 @@ public class CacheCall<T> implements Call<T> {
                     T data = parseResponse.body();
                     //网络请求成功，保存缓存数据
                     handleCache(response.headers(), data);
+                    Log.e("返回数据:", data.toString() );
                     //网络请求成功回调
                     sendSuccessResultCallback(false, data, call, response);
                 } catch (Exception e) {

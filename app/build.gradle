@@ -45,4 +45,5 @@ dependencies {
     compile project(':okgo')
     compile project(':tools')
     compile 'com.android.support:design:24.0.3'
+    compile 'com.google.code.gson:gson:2.8.0'
 }
