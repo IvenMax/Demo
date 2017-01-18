@@ -10,10 +10,20 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.iven.app.activity.UpdateVersionActivity">
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="检测版本是否更新"
-    android:layout_centerInParent="true"
-    android:onClick="btnClick"/>
+
+    <Button
+        android:id="@+id/btn_guideview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="40dp"
+        android:onClick="btnClick"
+        android:text="蒙板"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:onClick="btnClick"
+        android:text="检测版本是否更新"/>
 </RelativeLayout>

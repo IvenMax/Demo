@@ -27,4 +27,6 @@
     <color name="color_f80d0d">#f80d0d</color>
     <color name="color_048e63">#048e63</color>
     <color name="color_429ae6">#429ae6</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="color_cc222222">#cc222222</color>
 </resources>

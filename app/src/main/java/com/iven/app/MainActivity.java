@@ -3,8 +3,8 @@ package com.iven.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -64,26 +64,37 @@ public class MainActivity extends AppCompatActivity {
      */
     private void startAnim() {
         RotateAnimation animation = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        animation.setDuration(400);
-        animation.setRepeatCount(4);
+        animation.setDuration(1000);
+        animation.setRepeatCount(2);
         animation.setInterpolator(new LinearInterpolator());
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                Log.e(TAG, "onAnimationStart: 42" + "行 = ");
+                backgroundAlpha(0.6f);
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Log.e(TAG, "onAnimationEnd: 48" + "行 = -----------");
+                backgroundAlpha(1.0f);
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                Log.e(TAG, "onAnimationRepeat: 59" + "行 = ");
             }
         });
         iv_circle.startAnimation(animation);
+
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     */
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
     }
 
 }
