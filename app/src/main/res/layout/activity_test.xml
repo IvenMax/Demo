@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.iven.app.activity.TestActivity">
+    tools:context="com.iven.app.activity.RealmActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/value_30_dp"
         >
 
         <Button
@@ -19,8 +20,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="btnClick"
-            android:text="存"/>
+            android:text="增"/>
+        <Button
+            android:id="@+id/btn_realm_get"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/value_1_px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="查"/>
+        <Button
+            android:id="@+id/btn_realm_delete"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/value_1_px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="删"/>
     </LinearLayout>
 
     <ListView

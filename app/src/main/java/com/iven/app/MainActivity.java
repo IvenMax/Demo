@@ -14,6 +14,7 @@ import com.iven.app.activity.DialogUtilActivity;
 import com.iven.app.activity.ListViewSlideActivity;
 import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
+import com.iven.app.activity.RealmActivity;
 import com.iven.app.activity.UpdateVersionActivity;
 import com.iven.app.activity.VDHActivity;
 
@@ -54,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_dialog:
                 intent.setClass(this, DialogUtilActivity.class);
+                break;
+            case R.id.btn_realm_date:
+                intent.setClass(this, RealmActivity.class);
                 break;
         }
         startActivity(intent);

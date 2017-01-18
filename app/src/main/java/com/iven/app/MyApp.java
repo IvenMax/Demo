@@ -14,12 +14,18 @@ import java.util.logging.Level;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import io.realm.Realm;
+
 
 public class MyApp extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
+        /**
+         * //初始化Realm数据库
+         */
+        Realm.init(this);
 
         //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//
         HttpHeaders headers = new HttpHeaders();

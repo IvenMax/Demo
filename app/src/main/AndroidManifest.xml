@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".activity.VDHActivity">
         </activity>
-        <activity android:name=".activity.TestActivity">
+        <activity android:name=".activity.RealmActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
