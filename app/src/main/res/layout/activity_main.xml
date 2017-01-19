@@ -8,6 +8,13 @@
     android:orientation="vertical"
     tools:context="com.iven.app.MainActivity">
     <Button
+        android:id="@+id/btn_fragment"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="Fragment"
+        android:visibility="visible"/>
+    <Button
         android:id="@+id/btn_single_listview"
         style="@style/btn_common_style"
         android:layout_marginTop="@dimen/value_20_px"

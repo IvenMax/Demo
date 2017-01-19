@@ -11,6 +11,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.iven.app.activity.DialogUtilActivity;
+import com.iven.app.activity.FragmentHomeActivity;
 import com.iven.app.activity.ListViewSlideActivity;
 import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_multipl_listview://ListView属性实现多选模式
                intent.setClass(this, ListViewMultiplActivity.class);
+                break;
+            case R.id.btn_fragment://ListView属性实现多选模式
+               intent.setClass(this, FragmentHomeActivity.class);
                 break;
         }
         startActivity(intent);
