@@ -17,6 +17,8 @@ import com.iven.app.activity.PullToRefreshActivity;
 import com.iven.app.activity.RealmActivity;
 import com.iven.app.activity.UpdateVersionActivity;
 import com.iven.app.activity.VDHActivity;
+import com.iven.app.activity.listview.ListViewMultiplActivity;
+import com.iven.app.activity.listview.ListViewSingleActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "zpy_MainActivity";
@@ -58,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_realm_date:
                 intent.setClass(this, RealmActivity.class);
+                break;
+            case R.id.btn_single_listview://ListView属性实现单选模式
+                intent.setClass(this, ListViewSingleActivity.class);
+                break;
+            case R.id.btn_multipl_listview://ListView属性实现多选模式
+               intent.setClass(this, ListViewMultiplActivity.class);
                 break;
         }
         startActivity(intent);

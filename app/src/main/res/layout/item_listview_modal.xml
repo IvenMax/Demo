@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="@dimen/value_24_px">
+
+    <com.iven.app.view.CheckableLayout
+        android:id="@+id/toggle_id"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/value_80_px"
+        android:layout_gravity="center_vertical">
+
+
+        <TextView
+            android:id="@+id/tv_invest_color"
+            android:layout_width="@dimen/value_10_px"
+            android:layout_height="match_parent"
+            android:duplicateParentState="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/value_80_px"
+            android:layout_toRightOf="@id/tv_invest_color"
+            android:duplicateParentState="true"
+            android:gravity="left|center_vertical"
+            android:text="行业名"
+            android:textColor="@color/selector_textview"
+            android:textSize="@dimen/value_30_px"/>
+
+        <ImageView
+            android:id="@+id/iv_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/value_30_px"
+            android:background="@drawable/selector_img"
+            android:duplicateParentState="true"
+            android:scaleType="centerCrop"/>
+    </com.iven.app.view.CheckableLayout>
+</LinearLayout>

@@ -8,6 +8,20 @@
     android:orientation="vertical"
     tools:context="com.iven.app.MainActivity">
     <Button
+        android:id="@+id/btn_single_listview"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="ListView属性实现单选"
+        android:visibility="visible"/>
+    <Button
+        android:id="@+id/btn_multipl_listview"
+        style="@style/btn_common_style"
+        android:layout_marginTop="@dimen/value_20_px"
+        android:onClick="btnClick"
+        android:text="ListView属性实现多选"
+        android:visibility="visible"/>
+    <Button
         android:id="@+id/btn_realm_date"
         style="@style/btn_common_style"
         android:layout_marginTop="@dimen/value_20_px"
