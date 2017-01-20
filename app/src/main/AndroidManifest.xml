@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".activity.UpdateVersionActivity">
         </activity>
         <activity android:name=".activity.VDHActivity">
         </activity>
-        <activity android:name=".activity.RealmActivity">
+        <activity android:name=".activity.third.RealmActivity">
         </activity>
         <activity android:name=".activity.PullToRefreshActivity">
         </activity>
@@ -37,6 +37,13 @@
         <activity android:name=".activity.listview.ListViewMultiplActivity">
         </activity>
         <activity android:name=".activity.FragmentHomeActivity">
+        </activity>
+        <activity android:name=".activity.ViewLocationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

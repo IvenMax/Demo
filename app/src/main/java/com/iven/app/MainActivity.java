@@ -15,7 +15,7 @@ import com.iven.app.activity.FragmentHomeActivity;
 import com.iven.app.activity.ListViewSlideActivity;
 import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
-import com.iven.app.activity.RealmActivity;
+import com.iven.app.activity.third.RealmActivity;
 import com.iven.app.activity.UpdateVersionActivity;
 import com.iven.app.activity.VDHActivity;
 import com.iven.app.activity.listview.ListViewMultiplActivity;

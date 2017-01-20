@@ -1,4 +1,4 @@
-package com.iven.app.activity;
+package com.iven.app.activity.third;
 
 import android.graphics.Color;
 import android.os.Bundle;
