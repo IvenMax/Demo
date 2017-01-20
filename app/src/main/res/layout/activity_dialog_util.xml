@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.iven.app.activity.DialogUtilActivity">
+    <include
+        android:id="@+id/title"
+        layout="@layout/layout_title" />
     <Button
         android:id="@+id/btn_info_dialog"
         style="@style/btn_common_style"

@@ -1,26 +1,44 @@
 package com.iven.app.activity;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 
 import com.iven.app.R;
 import com.iven.app.tools.T;
 import com.iven.app.utils.DialogUtils;
+import com.iven.tools.base.BaseActivity;
 
-public class DialogUtilActivity extends AppCompatActivity {
+public class DialogUtilActivity extends BaseActivity {
+
+    private Button btn_info_dialog;
+    private Button btn_et_dialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dialog_util);
+    public int setLayout() {
+        return R.layout.activity_dialog_util;
     }
 
-    //362103198308130210
+    @Override
+    public void setTitle() {
+        title_title.setText("DialogUtils");
+        title_left.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.title_back), null, null, null);
+        title_left.setOnClickListener(this);
+    }
 
+    @Override
+    public void initWidget() {
+        btn_info_dialog = (Button) findViewById(R.id.btn_info_dialog);
+        btn_info_dialog.setOnClickListener(this);
+        btn_et_dialog = (Button) findViewById(R.id.btn_et_dialog);
+        btn_et_dialog.setOnClickListener(this);
+    }
 
-    public void btnClick(View view) {
+    @Override
+    public void widgetClick(View view) {
         switch (view.getId()) {
+            case R.id.title_left:
+                finish();
+                break;
             case R.id.btn_info_dialog:
                 showTips();
                 break;

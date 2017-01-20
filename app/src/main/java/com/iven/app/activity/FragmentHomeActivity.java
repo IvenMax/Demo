@@ -16,6 +16,8 @@ import com.iven.app.tools.T;
 
 /**
  * Fragment复习
+ * 泓洋：http://blog.csdn.net/lmj623565791/article/details/42628537
+ * 郭霖：http://blog.csdn.net/guolin_blog/article/details/8881711
  */
 public class FragmentHomeActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     private RadioButton rdb_left, rdb_right;
@@ -23,6 +25,7 @@ public class FragmentHomeActivity extends AppCompatActivity implements CompoundB
     private FragmentManager manager;
     private FirstFragment mFirstFragment;
     private SecondFragment mSecondFragment;
+    Bundle mBundle = new Bundle();//用于在两个碎片之间传值
 
 
     @Override
@@ -46,7 +49,6 @@ public class FragmentHomeActivity extends AppCompatActivity implements CompoundB
         mFirstFragment = new FirstFragment();
         mSecondFragment = new SecondFragment();
         rdb_left.setChecked(true);//默认让选中第一个Fragment
-
     }
 
     @Override
@@ -75,13 +77,24 @@ public class FragmentHomeActivity extends AppCompatActivity implements CompoundB
     public void switchContent(Fragment from, Fragment to, String tag) {
         FragmentTransaction transaction = manager.beginTransaction();
         if (null == from || !from.isAdded()) {
-            transaction.add(R.id.all_container, to, tag).commit();
+            transaction.add(R.id.all_container, to, tag).commitAllowingStateLoss();
             return;
         }
         if (!to.isAdded()) {
             transaction.hide(from).add(R.id.all_container, to, tag).commit();
         } else {
-            transaction.hide(from).show(to).commit();
+            transaction.hide(from).show(to).commitAllowingStateLoss();
         }
     }
+
+
+
+    public void setData(Bundle bundle) {
+        this.mBundle = bundle;
+    }
+
+    public Bundle getData() {
+        return mBundle;
+    }
 }
+
