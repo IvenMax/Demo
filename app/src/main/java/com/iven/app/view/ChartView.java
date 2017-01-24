@@ -6,9 +6,12 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
@@ -44,7 +47,7 @@ public class ChartView extends View {
     private final int MARGINLEFT = 20;
     private final int MARGINRIGHT = 20;
     private final int MARGINTOP = 40;
-    private final int MARGINBOTTOM = 20;
+    private final int MARGINBOTTOM = 40;
     //柱状图之间的间距
     private final int HORIZONTALSPACE = 20;
     //竖轴之间的间距
@@ -56,14 +59,19 @@ public class ChartView extends View {
     private double averageValue;
     //默认字体大小
     private int textSize = 14;//px
+    private int textSize30 = 30;//px
     //默认画笔宽度
     private int stockWidth = 3;
     //是否有数据
     private boolean hasData = false;
     //是否是长按模式
     private boolean isLongPress = false;
+    //手势处理
+    private GestureDetector mGestureDetector;
     //系统默认的最小滑动距离(低于这个值，不算是滑动)
     private int defaultDistance = 0;
+    private int dateIndex;
+    private int locationIndex;//十字线左边位置x
 
 
     public ChartView(Context context) {
@@ -108,7 +116,6 @@ public class ChartView extends View {
             drawLeftText(canvas);
             drawColumn(canvas);
         }
-        //        drawLeftText(canvas);
     }
 
     /**
@@ -123,9 +130,80 @@ public class ChartView extends View {
         }
         Paint paint = getDefaultPaint();
         paint.setStyle(Paint.Style.FILL);//填充
+
         int center = verticalSpace * 3 + MARGINTOP;//中轴线
         ColumnBean columnBean = list.get(0);
+        String date = columnBean.getDate();
+        dateIndex = Integer.valueOf(date.substring(date.lastIndexOf("-") + 1)) - 1;
+        //绘制柱状图
+        for (int i = 0; i < list.size(); i++) {
+            ColumnBean columnBean1 = list.get(i);
+            String date1 = columnBean1.getDate();
+            int i1 = Integer.valueOf(date1.substring(date.lastIndexOf("-") + 1)) - 1;
+            //计算每个柱的高度
+            double value = list.get(i).getValue();//每个柱的数值
+            double persent = value / averageValue;//按照比例实现
+            double endY = Math.abs(persent * verticalSpace);
+            if (value < 0) {//正负数
+                paint.setColor(Color.parseColor(GREENCOLOR));
+                endY = center + endY;
+            } else {
+                paint.setColor(Color.parseColor(REDCOLOR));
+                endY = center - endY;
+            }
+            endY = formatValue(endY);//格式化
+            int startX = (int) ((i1 * (columnWidth + HORIZONTALSPACE)) + MARGINLEFT + stockWidth);
+            int endX = (int) (startX + columnWidth);
+            Rect rect = new Rect();
+            rect.left = startX;
+            rect.right = endX;
+            rect.bottom = value < 0 ? (int) endY : center;
+            rect.top = value < 0 ? center : (int) endY;
+            canvas.drawRect(rect, paint);
+        }
+        //正常模式时候绘制底部的时间
+        if (!isLongPress) {
+            paint.setTextSize(textSize30);
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.parseColor(TEXTCOLOR));
+            String startDate = list.get(0).getDate();
+            String endDate = list.get(list.size() - 1).getDate();
+            float textWidth = paint.measureText(startDate);
+            int startX = (int) ((dateIndex * (columnWidth + HORIZONTALSPACE) + MARGINLEFT + stockWidth) - textWidth / 2);
+            int endBeginX = (int) ((dateIndex + list.size() - 1) * (columnWidth + HORIZONTALSPACE) + MARGINLEFT + stockWidth - textWidth / 2);
+            if (startX < MARGINLEFT + stockWidth) {
+                startX = MARGINLEFT + stockWidth;
+            }
+            if (endBeginX + textWidth > MARGINLEFT + stockWidth + width) {
+                endBeginX = (int) (MARGINLEFT + width - textWidth);
+            }
+            canvas.drawText(startDate, startX, MARGINTOP + hight + textSize30, paint);
+            canvas.drawText(endDate, endBeginX, MARGINTOP + hight + textSize30, paint);
+        }
+        //长按模式，绘制虚线(柱状体只有竖线)
+        if (isLongPress) {
+            Paint dashLinePaint = getDashLinePaint();
+            int x = (int) (((locationIndex + dateIndex) * (columnWidth + HORIZONTALSPACE)) + MARGINLEFT + stockWidth + columnWidth / 2);
+            canvas.drawLine(x, MARGINTOP, x, MARGINTOP + hight, dashLinePaint);
+            dashLinePaint.reset();
+            paint.reset();
+            String date1 = list.get(locationIndex).getDate();
+            drawBottomTimeText(canvas, date1, x, paint);
 
+        }
+
+
+    }
+
+    /**
+     * 长按模式，绘制底部的时间
+     *
+     * @param canvas
+     * @param date1
+     * @param x
+     * @param paint
+     */
+    private void drawBottomTimeText(Canvas canvas, String date1, int x, Paint paint) {
 
     }
 
@@ -228,6 +306,7 @@ public class ChartView extends View {
         defaultDistance = ViewConfiguration.get(context).getScaledEdgeSlop();
         Log.e(TAG, "init: 220" + "行 = " + defaultDistance);
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);//关闭硬件加速(三种方法，详见百度)
+        mGestureDetector = new GestureDetector(mContext, new MyGestureListener());
     }
 
     /**
@@ -306,6 +385,59 @@ public class ChartView extends View {
     private double formatValue(double value) {
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         return Double.valueOf(decimalFormat.format(value));
+    }
+
+    private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            super.onLongPress(e);
+            Log.e(TAG, "onLongPress: 384" + "行 = " + "long press....");
+            isLongPress = true;
+            calculateLongPressLocation((int) (e.getX() - MARGINLEFT));
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN://按下
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                isLongPress = false;
+                postInvalidate();
+                break;
+        }
+        return mGestureDetector.onTouchEvent(event);//勿忘
+    }
+
+    /**
+     * 计算长按的时候的坐标位置
+     *
+     * @param dx
+     */
+    private void calculateLongPressLocation(int dx) {
+        locationIndex = (int) ((dx - HORIZONTALSPACE / 2) / (columnWidth + HORIZONTALSPACE));
+        if (locationIndex > dateIndex + list.size() - 1) {
+            locationIndex = list.size() - 1;
+        } else if (locationIndex < dateIndex) {
+            locationIndex = 0;
+        } else {
+            locationIndex = Math.abs(locationIndex - dateIndex);
+        }
+        if (locationIndex < 0) {
+            locationIndex = 0;
+        }
+        postInvalidate();
+
+
     }
 
     /**---------------------------------对外方法-------------------------**/

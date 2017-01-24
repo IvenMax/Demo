@@ -27,7 +27,6 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void loadData(View view) {
-        T.showShort(this, "加载完成");
         chartview.setData(getData());
         Log.e(TAG, "loadData: 31" + "行 = " + getData().size());
     }
