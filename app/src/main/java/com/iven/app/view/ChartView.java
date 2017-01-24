@@ -27,6 +27,8 @@ import static java.lang.String.format;
  * @author Iven
  * @date 2017/1/23 9:20
  * @Description 柱形图-用Path实现
+ * todo 用baseline 实现将文字画在线上
+ * https://www.cnblogs.com/tianzhijiexian/p/4297664.html
  */
 
 public class ChartView extends View {
