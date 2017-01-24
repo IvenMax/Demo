@@ -43,6 +43,8 @@ public class ChartView extends View {
     private static final String GREENCOLOR = "#048e63";
     //正数颜色
     private static final String REDCOLOR = "#f80d0d";
+    //底部日期的背景色
+    private static final String BOTTOMTIMEBGCOLOR = "#aaE2EBF9";
     //默认边距
     private final int MARGINLEFT = 20;
     private final int MARGINRIGHT = 20;
@@ -198,13 +200,34 @@ public class ChartView extends View {
     /**
      * 长按模式，绘制底部的时间
      *
-     * @param canvas
-     * @param date1
-     * @param x
-     * @param paint
+     * @param canvas canvas
+     * @param date   日期
+     * @param startX
+     * @param paint  画笔
      */
-    private void drawBottomTimeText(Canvas canvas, String date1, int x, Paint paint) {
-
+    private void drawBottomTimeText(Canvas canvas, String date, int startX, Paint paint) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(stockWidth);
+        paint.setTextSize(35);
+        paint.setColor(Color.parseColor(BOTTOMTIMEBGCOLOR));
+        int dateWidth = (int) paint.measureText(date);//字体宽度
+        int right = startX + dateWidth / 2 + HORIZONTALSPACE;
+        int left = startX - dateWidth / 2 - HORIZONTALSPACE;
+        if (left < MARGINLEFT) {
+            left = MARGINLEFT;
+            right = left + dateWidth + HORIZONTALSPACE * 2;
+        }
+        if (right > MARGINLEFT + width) {
+            right = MARGINLEFT + width;
+            left = right - dateWidth - HORIZONTALSPACE * 2;
+        }
+        //背景
+        Rect rect = new Rect(left, MARGINTOP + hight, right, MARGINTOP + hight + HORIZONTALSPACE + 50);
+        canvas.drawRect(rect, paint);
+        //日期
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setColor(Color.parseColor(TEXTCOLOR));
+        canvas.drawText(date, left + HORIZONTALSPACE, MARGINTOP + hight+HORIZONTALSPACE+10, paint);
     }
 
     /**
@@ -419,8 +442,8 @@ public class ChartView extends View {
                     if (diffX >= defaultDistance) {
                         calculateLongPressLocation(finalX);
                     }
-                }else {
-                    // TODO: 2017/1/24  
+                } else {
+                    // TODO: 2017/1/24
                 }
 
                 break;
@@ -467,3 +490,27 @@ public class ChartView extends View {
         postInvalidate();
     }
 }
+
+/*    protected void drawTextWithBG(float x, float y, String str, Paint paint, Canvas canvas) {
+        float topY = y - textSize / 2 - 6;
+        if (topY < 0) {
+            topY = 0;
+        }
+        float bottomY = topY + textSize + textMarginTopBottom + 6;
+        paint.setTextSize(textSize);
+        float strLenght = paint.measureText(str);
+        RectF rect;
+        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+
+        if (x < marginLeft + (mChartViewWidth - marginRight - marginLeft) / 2) {
+            rect = new RectF(mChartViewWidth - marginRight - strLenght - 16, topY, mChartViewWidth - marginRight, bottomY);
+            canvas.drawRect(rect, paint);
+        } else {
+            rect = new RectF(marginLeft, topY, marginLeft + strLenght + 16, bottomY);
+            canvas.drawRect(rect, paint);
+        }
+        paint.setColor(Color.parseColor(COLOR_FONT_BLACK));
+        paint.setTextAlign(Paint.Align.CENTER);
+        float baseline = (rect.bottom + rect.top - fontMetrics.bottom - fontMetrics.top) / 2;
+
+    }*/

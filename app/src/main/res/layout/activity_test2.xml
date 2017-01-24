@@ -12,7 +12,7 @@
         android:layout_height="300dp"
         android:id="@+id/chartview"
         android:layout_marginTop="@dimen/value_30_dp"
-        android:background="#11111111"
+        android:background="#11111000"
         />
 
     <Button
