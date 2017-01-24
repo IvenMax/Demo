@@ -10,6 +10,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
+import com.iven.app.activity.ChartViewActivity;
 import com.iven.app.activity.DialogUtilActivity;
 import com.iven.app.activity.FragmentHomeActivity;
 import com.iven.app.activity.ListViewSlideActivity;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public void btnClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.btn_jingdong:
+            case R.id.btn_jingdong://仿京东广告实现
                 intent.setClass(this, NoticeViewActivity.class);
                 break;
             case R.id.btn_version:
@@ -56,20 +57,23 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_lv_slide:
                 intent.setClass(this, ListViewSlideActivity.class);
                 break;
-            case R.id.btn_dialog:
+            case R.id.btn_dialog://Dialog封装
                 intent.setClass(this, DialogUtilActivity.class);
                 break;
-            case R.id.btn_realm_date:
+            case R.id.btn_realm_date://realm数据库初探
                 intent.setClass(this, RealmActivity.class);
                 break;
             case R.id.btn_single_listview://ListView属性实现单选模式
                 intent.setClass(this, ListViewSingleActivity.class);
                 break;
             case R.id.btn_multipl_listview://ListView属性实现多选模式
-               intent.setClass(this, ListViewMultiplActivity.class);
+                intent.setClass(this, ListViewMultiplActivity.class);
                 break;
             case R.id.btn_fragment://ListView属性实现多选模式
-               intent.setClass(this, FragmentHomeActivity.class);
+                intent.setClass(this, FragmentHomeActivity.class);
+                break;
+            case R.id.btn_culmn://柱状图演示
+                intent.setClass(this, ChartViewActivity.class);
                 break;
         }
         startActivity(intent);
