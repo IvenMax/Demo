@@ -404,10 +404,25 @@ public class ChartView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int downX = 0;//按下时的x坐标
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN://按下
+                downX = (int) event.getX();
                 break;
-            case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_MOVE://移动处理
+                int moveX = (int) event.getX();
+                int moveY = (int) event.getY();
+                int diffX = Math.abs(moveX - downX);
+                int finalX = moveX - MARGINLEFT;
+                //有效区域内才能执行拖动效果
+                if (isLongPress && moveX > MARGINLEFT && moveX < (MARGINLEFT + width) && moveY > MARGINTOP && moveY < (MARGINTOP + hight)) {
+                    if (diffX >= defaultDistance) {
+                        calculateLongPressLocation(finalX);
+                    }
+                }else {
+                    // TODO: 2017/1/24  
+                }
+
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
