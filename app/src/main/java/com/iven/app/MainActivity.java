@@ -16,6 +16,8 @@ import com.iven.app.activity.FragmentHomeActivity;
 import com.iven.app.activity.ListViewSlideActivity;
 import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
+import com.iven.app.activity.TestActivity;
+import com.iven.app.activity.recyclerview.RecyclerviewActivity;
 import com.iven.app.activity.third.RealmActivity;
 import com.iven.app.activity.UpdateVersionActivity;
 import com.iven.app.activity.VDHActivity;
@@ -45,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_jingdong://仿京东广告实现
                 intent.setClass(this, NoticeViewActivity.class);
                 break;
-            case R.id.btn_version:
+            case R.id.btn_version://蒙板显示
                 intent.setClass(this, UpdateVersionActivity.class);
                 break;
-            case R.id.btn_vdh:
+            case R.id.btn_vdh://nothing
                 intent.setClass(this, VDHActivity.class);
                 break;
             case R.id.btn_pulltoresresh:
@@ -69,11 +71,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_multipl_listview://ListView属性实现多选模式
                 intent.setClass(this, ListViewMultiplActivity.class);
                 break;
-            case R.id.btn_fragment://ListView属性实现多选模式
+            case R.id.btn_fragment://碎片回顾
                 intent.setClass(this, FragmentHomeActivity.class);
                 break;
             case R.id.btn_culmn://柱状图演示
                 intent.setClass(this, ChartViewActivity.class);
+                break;
+            case R.id.btn_test://Test
+                intent.setClass(this, TestActivity.class);
+                break;
+            case R.id.btn_recyclerview://recyclerview
+                intent.setClass(this, RecyclerviewActivity.class);
                 break;
         }
         startActivity(intent);

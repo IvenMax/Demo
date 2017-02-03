@@ -18,11 +18,11 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btn_culmn"
+                android:id="@+id/btn_recyclerview"
                 style="@style/btn_common_style"
                 android:layout_marginTop="@dimen/value_20_px"
                 android:onClick="btnClick"
-                android:text="柱形图"
+                android:text="RecyclerView"
                 android:visibility="visible"/>
 
             <Button
@@ -78,7 +78,7 @@
                 style="@style/btn_common_style"
                 android:layout_marginTop="@dimen/value_20_px"
                 android:onClick="btnClick"
-                android:text="版本更新"
+                android:text="蒙板"
                 android:visibility="visible"/>
 
             <Button
@@ -104,7 +104,20 @@
                 android:onClick="btnClick"
                 android:text="PullToRefreshLayout"
                 android:visibility="gone"/>
-
+            <Button
+                android:id="@+id/btn_test"
+                style="@style/btn_common_style"
+                android:layout_marginTop="@dimen/value_20_px"
+                android:onClick="btnClick"
+                android:text="Test"
+                android:visibility="visible"/>
+            <Button
+                android:id="@+id/btn_culmn"
+                style="@style/btn_common_style"
+                android:layout_marginTop="@dimen/value_20_px"
+                android:onClick="btnClick"
+                android:text="柱形图"
+                android:visibility="visible"/>
             <ImageView
                 android:id="@+id/iv_circle"
                 android:layout_width="wrap_content"
@@ -112,6 +125,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/value_20_px"
                 android:src="@mipmap/circle"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -7,13 +7,11 @@
     android:layout_height="match_parent"
     tools:context="com.iven.app.activity.TestActivity">
 
-    <com.iven.app.view.ChartView
+    <com.iven.app.view.TestView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/chartview"
-        android:layout_marginTop="@dimen/value_30_dp"
-        android:background="#11111000"
+        android:layout_height="match_parent"
         />
+
 
     <Button
         android:layout_width="wrap_content"

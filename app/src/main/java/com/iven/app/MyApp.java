@@ -8,6 +8,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.logging.Level;
 
@@ -26,6 +27,12 @@ public class MyApp extends Application {
          * //初始化Realm数据库
          */
         Realm.init(this);
+        /**
+         * 初始化LeakCanary--内存泄漏检测
+         * https://github.com/jjz/blog/blob/master/android/LeakCanary%E5%82%BB%E7%93%9C%E5%BC%8F%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7.md
+         * https://github.com/square/leakcanary
+         */
+        LeakCanary.install(this);
 
         //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//
         HttpHeaders headers = new HttpHeaders();
