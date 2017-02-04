@@ -261,7 +261,6 @@ public class ChartView extends View {
         for (int i = 0; i < leftStrings.length; i++) {
             float v = textPaint.measureText(leftStrings[i]);
             Paint.FontMetrics metrics = new Paint.FontMetrics();
-            Log.e(TAG, "drawLeftText: 142" + "行 = " + v);
             canvas.drawText(leftStrings[i], MARGINLEFT + 10, MARGINTOP - 10 + verticalSpace * i, textPaint);
         }
         textPaint.reset();
@@ -329,7 +328,6 @@ public class ChartView extends View {
      */
     private void init(Context context) {
         defaultDistance = ViewConfiguration.get(context).getScaledEdgeSlop();
-        Log.e(TAG, "init: 220" + "行 = " + defaultDistance);
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);//关闭硬件加速(三种方法，详见百度)
         mGestureDetector = new GestureDetector(mContext, new MyGestureListener());
     }
@@ -421,7 +419,6 @@ public class ChartView extends View {
         @Override
         public void onLongPress(MotionEvent e) {
             super.onLongPress(e);
-            Log.e(TAG, "onLongPress: 384" + "行 = " + "long press....");
             isLongPress = true;
             calculateLongPressLocation((int) (e.getX() - MARGINLEFT));
         }

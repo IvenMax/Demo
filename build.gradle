@@ -12,6 +12,14 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+ext{
+    compileSdk = 24
+    minSdk = 16
+    targetSdk = 24
+    support = "23.1.1"
+    buildTools = "24.0.3"
+    buildstyle ="debug"
+}
 
 allprojects {
     repositories {

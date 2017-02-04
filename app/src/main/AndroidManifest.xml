@@ -46,8 +46,11 @@
         </activity>
         <activity android:name=".activity.recyclerview.RecyclerviewActivity">
         </activity>
-        <activity android:name=".activity.WebActivity"
+        <activity
+            android:name=".activity.WebActivity"
             android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".activity.material.MaterialDesignActivity">
         </activity>
     </application>
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_column"
+        android:icon="@mipmap/menu01"
+        android:title="柱状图"/>
+    <item
+        android:id="@+id/wallet"
+        android:icon="@mipmap/menu02"
+        android:title="钱包"/>
+    <item
+        android:id="@+id/photo"
+        android:icon="@mipmap/menu03"
+        android:title="相册"/>
+    <item
+        android:id="@+id/file"
+        android:icon="@mipmap/menu04"
+        android:title="文件"/>
+    <item
+        android:id="@+id/about"
+        android:icon="@mipmap/menu05"
+        android:title="关于"/>
+</menu>

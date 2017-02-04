@@ -22,7 +22,8 @@ import com.iven.app.R;
 public class WebActivity extends AppCompatActivity {
 
     private WebView mWebView;
-    private EditText mEditText;
+    private EditText mEditText_name;
+    private EditText mEditText_pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,8 @@ public class WebActivity extends AppCompatActivity {
 
     private void init() {
         mWebView = (WebView) findViewById(R.id.webview_basic);
-        mEditText = (EditText) findViewById(R.id.edit_web);
+        mEditText_name = (EditText) findViewById(R.id.edit_web_name);
+        mEditText_pwd = (EditText) findViewById(R.id.edit_web_pwd);
         setWebView(mWebView);
     }
 
@@ -69,9 +71,15 @@ public class WebActivity extends AppCompatActivity {
 
     //javav调用JS
     public void javaTurn(View view) {
-        String string = mEditText.getText().toString();
-        String javaName = "name";
-        String javaPwd = "password";
+        String javaName = mEditText_name.getText().toString();
+        String javaPwd = mEditText_pwd.getText().toString();
+        if (TextUtils.isEmpty(javaName)) {
+            javaName = "name";
+        }
+        if (TextUtils.isEmpty(javaPwd)) {
+            javaPwd = "password";
+        }
+        // TODO: 2017/2/4 注意：对于str类型的，一定要用单引号包括起来
         mWebView.loadUrl("javascript:setData('" + javaName + "','" + javaPwd + "')");
     }
 

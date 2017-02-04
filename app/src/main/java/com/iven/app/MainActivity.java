@@ -18,6 +18,7 @@ import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
 import com.iven.app.activity.TestActivity;
 import com.iven.app.activity.WebActivity;
+import com.iven.app.activity.material.MaterialDesignActivity;
 import com.iven.app.activity.recyclerview.RecyclerviewActivity;
 import com.iven.app.activity.third.RealmActivity;
 import com.iven.app.activity.UpdateVersionActivity;
@@ -25,6 +26,9 @@ import com.iven.app.activity.VDHActivity;
 import com.iven.app.activity.listview.ListViewMultiplActivity;
 import com.iven.app.activity.listview.ListViewSingleActivity;
 
+/**
+ * Android Studio使用技巧---http://www.jianshu.com/p/8accfeefc182
+ */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "zpy_MainActivity";
     private ImageView iv_circle;
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_webview://webview
                 intent.setClass(this, WebActivity.class);
+                break;
+            case R.id.btn_material_design://Material Design
+                intent.setClass(this, MaterialDesignActivity.class);
                 break;
         }
         startActivity(intent);

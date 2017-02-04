@@ -18,16 +18,29 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="@dimen/value_10_px"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/value_10_px">
 
         <EditText
-            android:id="@+id/edit_web"
+            android:id="@+id/edit_web_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="..."
-            android:visibility="gone"
+            android:hint="name.."
+            android:visibility="visible"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"/>
+
+        <EditText
+            android:id="@+id/edit_web_pwd"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="password.."
+            android:visibility="visible"
             />
 
         <Button

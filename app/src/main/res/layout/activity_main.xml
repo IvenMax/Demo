@@ -17,6 +17,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
+                android:id="@+id/btn_material_design"
+                style="@style/btn_common_style"
+                android:layout_marginTop="@dimen/value_20_px"
+                android:onClick="btnClick"
+                android:text="Material Design"
+                android:visibility="visible"/>
+            <Button
                 android:id="@+id/btn_webview"
                 style="@style/btn_common_style"
                 android:layout_marginTop="@dimen/value_20_px"
@@ -93,7 +100,7 @@
                 android:layout_marginTop="@dimen/value_20_px"
                 android:onClick="btnClick"
                 android:text="VDH"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_lv_slide"

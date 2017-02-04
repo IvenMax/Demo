@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iven.app.activity.ChartViewActivity">
+    >
 
     <com.iven.app.view.ChartView
         android:layout_width="match_parent"
@@ -19,6 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="loadData"
+        android:id="@+id/btn_column_load"
         android:text="加载数据"/>
 </RelativeLayout>
