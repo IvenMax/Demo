@@ -33,7 +33,7 @@ public class ColumnFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_chart_view, container, false);
+        View view = inflater.inflate(R.layout.layout_fragment_column, container, false);
         btn_column_load = (Button) view.findViewById(R.id.btn_column_load);
         chartview = (ChartView) view.findViewById(R.id.chartview);
         return view;

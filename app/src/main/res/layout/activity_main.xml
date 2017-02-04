@@ -44,7 +44,7 @@
                 android:layout_marginTop="@dimen/value_20_px"
                 android:onClick="btnClick"
                 android:text="Fragment"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_single_listview"
