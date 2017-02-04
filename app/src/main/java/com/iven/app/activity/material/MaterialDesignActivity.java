@@ -206,4 +206,10 @@ public class MaterialDesignActivity extends AppCompatActivity {
             transaction.hide(from).show(to).commitAllowingStateLoss();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        switchContent(null, mFragmentArrayList.get(0), "first");
+    }
 }
