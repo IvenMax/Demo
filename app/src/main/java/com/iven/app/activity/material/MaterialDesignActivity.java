@@ -143,6 +143,8 @@ public class MaterialDesignActivity extends AppCompatActivity {
                     case R.id.wallet:
                         mTabLayout.getTabAt(1).select();
                         break;
+                    default:
+                        break;
                 }
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 return true;
