@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>login</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=1">
+    <style>
+		body,html{
+			font-size: 20px;
+		}
+		body,html,p,input{
+			margin: 0;
+			padding: 0;
+		}
+		h1{
+			margin: 0;
+			padding: 0;
+			color: #fff;
+		}
+		header{
+			width: 100%;
+			height: 2.5rem;
+			background: #abcdef;
+			text-align: center;
+		}
+		section{
+			text-align: center;
+			padding-top: 1rem;
+		}
+		section p{
+			padding: 0.3rem;
+		}
+		section p input{
+			width: 6rem;
+			height: 1rem;
+			border: none;
+			border: 1px solid #666;
+		}
+		section button{
+			margin: 2rem 1rem;
+			width: 3rem;
+			height: 1rem;
+			font-size: 0.7rem;
+		}
+
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <header>
+        <h1>Login</h1>
+    </header>
+    <section>
+        <p>
+            <span>用户名:</span>
+            <input id="name" type="text">
+        </p>
+        <p>
+            <span>密　码:</span>
+            <input id="pwd" type="">
+        </p>
+        <button onclick="submit()" type="submit">提交</button>
+        <button onclick="reset()" type="reset">重置</button>
+        <a href="###"
+           style="display: block;text-align: right;font-size: 0.7rem;color: red;margin-right: 20px;">忘记密码？</a>
+    </section>
+</div>
+<script>
+		function submit() {
+			var name = document.getElementById('name').value;
+			var pwd = document.getElementById('pwd').value;
+			<!--让java代码调用-->
+			window.AndroidWebView.getNameAndPwdFromJS(name,pwd);
+		}
+
+		function reset() {
+			document.getElementById('name').value = '';
+			document.getElementById('pwd').value = '';
+		}
+		function setData(name, pwd) {
+			document.getElementById('name').value = name;
+			document.getElementById('pwd').value = pwd;
+		}
+
+</script>
+</body>
+</html>

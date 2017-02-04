@@ -16,7 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <Button
+                android:id="@+id/btn_webview"
+                style="@style/btn_common_style"
+                android:layout_marginTop="@dimen/value_20_px"
+                android:onClick="btnClick"
+                android:text="WebView"
+                android:visibility="visible"/>
             <Button
                 android:id="@+id/btn_recyclerview"
                 style="@style/btn_common_style"

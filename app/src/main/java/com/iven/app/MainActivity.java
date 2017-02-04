@@ -17,6 +17,7 @@ import com.iven.app.activity.ListViewSlideActivity;
 import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
 import com.iven.app.activity.TestActivity;
+import com.iven.app.activity.WebActivity;
 import com.iven.app.activity.recyclerview.RecyclerviewActivity;
 import com.iven.app.activity.third.RealmActivity;
 import com.iven.app.activity.UpdateVersionActivity;
@@ -82,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_recyclerview://recyclerview
                 intent.setClass(this, RecyclerviewActivity.class);
+                break;
+            case R.id.btn_webview://webview
+                intent.setClass(this, WebActivity.class);
                 break;
         }
         startActivity(intent);
