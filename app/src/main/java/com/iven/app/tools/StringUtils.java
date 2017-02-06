@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.iven.app.R;
 
+import java.text.DecimalFormat;
+
 /**
  * @author Iven
  * @date 2017/1/16 10:09
@@ -72,5 +74,15 @@ public class StringUtils {
                 textView.setText("+" + content);
             }
         }
+    }
+
+    /**
+     * 两位小数
+     * @param value
+     * @return
+     */
+    private double getDecimal(double value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        return Double.parseDouble(decimalFormat.format(value));
     }
 }

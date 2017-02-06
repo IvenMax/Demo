@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * @author Iven
  * @date 2017/1/17 16:53
- * @Description
+ * @Description 新手指引(蒙板)
  */
 public class GuideView extends RelativeLayout implements ViewTreeObserver.OnGlobalLayoutListener {
     private Context mContent;
