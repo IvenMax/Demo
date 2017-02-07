@@ -45,7 +45,6 @@ public class ColumnFragment extends Fragment {
         btn_column_load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "onClick: 47" + "行 = " );
                 chartview.setData(getData());
             }
         });

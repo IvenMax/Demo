@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.iven.app.activity.ChartViewActivity;
 import com.iven.app.activity.DialogUtilActivity;
 import com.iven.app.activity.FragmentHomeActivity;
+import com.iven.app.activity.GalleryViewPagerActivity;
 import com.iven.app.activity.ListViewSlideActivity;
 import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
@@ -93,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_material_design://Material Design
                 intent.setClass(this, MaterialDesignActivity.class);
+                break;
+            case R.id.btn_gallery_viewpager://画廊效果
+                intent.setClass(this, GalleryViewPagerActivity.class);
                 break;
         }
         startActivity(intent);

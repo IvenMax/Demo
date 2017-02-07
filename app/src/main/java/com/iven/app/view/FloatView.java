@@ -4,7 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -40,9 +43,9 @@ public class FloatView extends View {
 
     private boolean hasDate = true;//是否已经设置数据
     private String[] leftValues;
-    private final String COLOR_BLUE = "#429ae6";
+    private final String COLOR_BEGIN = "#429ae6";
     //背景渐变色
-    private final String COLOR_BLUE_ALPHA = "#11429ae6";
+    private final String COLOR_END = "#11429ae6";
 
     private void init() {
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速(三种方法，详见百度)
@@ -72,7 +75,24 @@ public class FloatView extends View {
         super.onDraw(canvas);
         drawBorders(canvas);
         drawLeftText(canvas);
+        drawLine(canvas);
+    }
 
+    private void drawLine(Canvas canvas) {
+        Paint defaultPaint = getDefaultPaint();
+        defaultPaint.setStyle(Paint.Style.STROKE);
+        Path path = new Path();
+        path.moveTo(MARGINLEFT, MARGINTOP + mHeight);
+        path.lineTo(500, 500);
+        path.lineTo(MARGINLEFT + mWidth, MARGINTOP + mHeight);
+        canvas.drawPath(path, defaultPaint);
+        LinearGradient linearGradient = new LinearGradient(MARGINLEFT, MARGINTOP, MARGINLEFT + mWidth, MARGINTOP + mHeight, Color.parseColor(COLOR_BEGIN), Color.parseColor(COLOR_END), Shader.TileMode.CLAMP);
+        Paint paint = getDefaultPaint();
+        paint.setShader(linearGradient);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawPath(path,paint);
+
+        //
     }
 
 
