@@ -3,6 +3,7 @@ package com.iven.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -138,6 +139,22 @@ public class MainActivity extends AppCompatActivity {
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         getWindow().setAttributes(lp);
+        bubbleSort();
     }
+
+    private void bubbleSort() {
+        int score[] = {67, 69, 75, 87, 89, 90, 99, 100};
+        for (int i = 0; i < score.length - 1; i++) {
+            for (int j = 0; j < score.length - i - 1; j++) {
+                int temp = score[j];
+                score[j] = score[1+j];
+                score[1+j] = temp;
+            }
+        }
+        for (int i = 0; i < score.length; i++) {
+            Log.e(TAG, "bubbleSort: 154" + "行 = " +score[i]);
+        }
+    }
+
 
 }
