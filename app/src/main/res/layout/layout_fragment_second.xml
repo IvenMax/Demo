@@ -3,11 +3,20 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/color_999999"
-              android:gravity="center"
               android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="right------"/>
+        android:layout_margin="30dp"
+        android:clickable="true"
+        android:text="right------"
+        android:textSize="20dp"/>
+
+    <com.iven.app.view.TimeSharingView
+        android:id="@+id/timeshare_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="gone"/>
 </LinearLayout>

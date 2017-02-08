@@ -5,8 +5,10 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.iven.app.R;
+import com.iven.app.bean.ColumnBean;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  * @author Iven
@@ -81,8 +83,47 @@ public class StringUtils {
      * @param value
      * @return
      */
-    private double getDecimal(double value) {
+    private static double getDecimal(double value) {
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         return Double.parseDouble(decimalFormat.format(value));
+    }
+    /**
+     * 根据中间值获取如果没有数据返回-1
+     *
+     * @param list     数据集合
+     * @param midValue 中间值
+     */
+    public static int getMaxIndex(ArrayList<ColumnBean> list, Context context, double midValue) {
+        if (list == null || list.size() == 0) {
+            return -1;
+        }
+        int size = list.size();
+        double indexValue = Math.abs(list.get(0).getNetValue() - midValue);
+        int index = 0;
+
+        for (int i = 1; i < size; i++) {
+            double tempValue = Math.abs(list.get(i).getNetValue() - midValue);
+            if (tempValue > indexValue) {
+                indexValue = tempValue;
+                index = i;
+            }
+        }
+        return index;
+    }
+    public static ArrayList<ColumnBean> getData() {
+        ArrayList<ColumnBean> list = new ArrayList<ColumnBean>();
+        for (int i = 0; i < 31; i++) {
+            ColumnBean columnBean = new ColumnBean();
+            double value = (10000 - ((Math.random() * 20000)));
+            value = getDecimal(value);
+            columnBean.setValue(value);
+            if (i + 1 < 10) {
+                columnBean.setDate("2016-11-0" + (i + 1));
+            } else {
+                columnBean.setDate("2016-11-" + (i + 1));
+            }
+            list.add(columnBean);
+        }
+        return list;
     }
 }

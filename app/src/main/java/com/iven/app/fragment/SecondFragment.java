@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.iven.app.R;
+import com.iven.app.view.TimeSharingView;
 
 /**
  * @author Iven
@@ -19,6 +21,8 @@ import com.iven.app.R;
 public class SecondFragment extends Fragment {
     private Context mContext;
     private static final String TAG = "zpy_SecondFragment";
+    private TimeSharingView timeSharingView;
+    private TextView mTextView;
 
     @Nullable
     @Override
@@ -26,4 +30,5 @@ public class SecondFragment extends Fragment {
         View view = inflater.inflate(R.layout.layout_fragment_second, container, false);
         return view;
     }
+
 }

@@ -11,6 +11,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -56,6 +57,13 @@ public class WebActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient());//添加客户端支持
         //第二个参数，一定要跟JS中一致
         webView.addJavascriptInterface(new JsInterface(this), "AndroidWebView");
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                Toast.makeText(WebActivity.this, "页面加载完毕", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //返回键处理
