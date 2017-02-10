@@ -86,7 +86,7 @@ public class FloatView extends View {
         path.lineTo(500, 500);
         path.lineTo(MARGINLEFT + mWidth, MARGINTOP + mHeight);
         canvas.drawPath(path, defaultPaint);
-        LinearGradient linearGradient = new LinearGradient(MARGINLEFT, MARGINTOP, MARGINLEFT + mWidth, MARGINTOP + mHeight, Color.parseColor(COLOR_BEGIN), Color.parseColor(COLOR_END), Shader.TileMode.CLAMP);
+        LinearGradient linearGradient = new LinearGradient(MARGINLEFT, MARGINTOP, MARGINLEFT, MARGINTOP + mHeight, Color.parseColor(COLOR_BEGIN), Color.parseColor(COLOR_END), Shader.TileMode.CLAMP);
         Paint paint = getDefaultPaint();
         paint.setShader(linearGradient);
         paint.setStyle(Paint.Style.FILL);
