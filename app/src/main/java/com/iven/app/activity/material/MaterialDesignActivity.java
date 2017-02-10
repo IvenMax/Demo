@@ -81,7 +81,7 @@ public class MaterialDesignActivity extends AppCompatActivity {
     private void initTab() {
         mTabLayout.removeAllTabs();
         mTabLayout.addTab(mTabLayout.newTab().setText("柱状图"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("002"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("折线图"));
         mTabLayout.addTab(mTabLayout.newTab().setText("003"));
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

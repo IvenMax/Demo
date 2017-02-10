@@ -4,14 +4,17 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Shader;
+import android.graphics.PointF;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import com.iven.app.bean.ColumnBean;
+
+import java.util.ArrayList;
 
 /**
  * @author Iven
@@ -41,14 +44,25 @@ public class FloatView extends View {
     private int verticalspace;//竖直方向上每两个横线之间的间距
     private int leftTextSize = 30;//默认文本大小
 
-    private boolean hasDate = true;//是否已经设置数据
     private String[] leftValues;
     private final String COLOR_BEGIN = "#429ae6";
     //背景渐变色
     private final String COLOR_END = "#11429ae6";
+    //是否已经设置数据
+    private boolean hasSetData = false;
+    //数据集合
+    private ArrayList<ColumnBean> datas;
+    //是否是长按模式
+    private boolean isLongPress = false;
+    //点的集合
+    private ArrayList<PointF> mPointFs;
+    private Path linePath;
 
     private void init() {
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速(三种方法，详见百度)
+        datas = new ArrayList<>();
+        mPointFs = new ArrayList<>();
+
         //        leftValues = new String[7];
         leftValues = new String[]{"+15000.00", "+10000.00", "+5000.00", "0.00", "-5000.00", "-10000.00", "-15000.00"};
     }
@@ -74,11 +88,34 @@ public class FloatView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawBorders(canvas);
+        if (hasSetData) {
+
+        }
         drawLeftText(canvas);
         drawLine(canvas);
     }
 
     private void drawLine(Canvas canvas) {
+        calculatePoints();
+
+    }
+
+    /**
+     * 计算点的位置
+     */
+    private void calculatePoints() {
+        mPointFs.clear();
+        int middleY = MARGINTOP + verticalspace * 3;
+        linePath = new Path();
+        int size = datas.size();
+        for (int i = 0; i < size; i++) {
+            ColumnBean columnBean = datas.get(i);
+
+        }
+
+    }
+
+/*    private void drawLine(Canvas canvas) {
         Paint defaultPaint = getDefaultPaint();
         defaultPaint.setStyle(Paint.Style.STROKE);
         Path path = new Path();
@@ -90,10 +127,8 @@ public class FloatView extends View {
         Paint paint = getDefaultPaint();
         paint.setShader(linearGradient);
         paint.setStyle(Paint.Style.FILL);
-        canvas.drawPath(path,paint);
-
-        //
-    }
+        canvas.drawPath(path, paint);
+    }*/
 
 
     /**
@@ -186,5 +221,15 @@ public class FloatView extends View {
 
     public FloatView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    /**
+     * 设置数据
+     */
+    public void setData(ArrayList<ColumnBean> list) {
+        this.datas = list;
+        hasSetData = true;
+        postInvalidate();
+        Log.e(TAG, "setData: 212" + "行 = " + datas.size());
     }
 }

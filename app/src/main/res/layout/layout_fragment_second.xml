@@ -5,18 +5,23 @@
               android:background="@color/color_999999"
               android:orientation="vertical">
 
+
+
+    <com.iven.app.view.TimeSharingView
+        android:id="@+id/timeshare_view"
+        android:layout_marginTop="@dimen/value_30_px"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:visibility="visible"/>
     <TextView
         android:id="@+id/tv_log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="30dp"
+        android:background="@color/cardview_dark_background"
         android:clickable="true"
-        android:text="right------"
+        android:text=" LOAD "
+        android:textColor="@color/white"
         android:textSize="20dp"/>
-
-    <com.iven.app.view.TimeSharingView
-        android:id="@+id/timeshare_view"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:visibility="gone"/>
 </LinearLayout>

@@ -195,10 +195,11 @@ public class TimeSharingView extends View {
         canvas.drawPath(path, paint);
 
         //绘制中间的横线
+        Paint deshPathPaint = getDeshPathPaint();
         int i = 1;
         for (; i < leftValue.length; i++) {
             float startY = MARGINTOP + i * spacVertical;
-            canvas.drawLine(leftSpac, startY, leftSpac + width, startY, paint);
+            canvas.drawLine(leftSpac, startY, leftSpac + width, startY, deshPathPaint);
         }
         //绘制竖线
         for (i = 1; i < 8; i++) {
