@@ -3,6 +3,8 @@
           package="com.iven.app">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:name=".MyApp"
@@ -61,6 +63,8 @@
         </activity>
         <activity android:name=".activity.GalleryViewPagerActivity">
         </activity>
+        <!--服务，注册-->
+        <service android:name=".service.WindowService"/>
     </application>
 
 </manifest>

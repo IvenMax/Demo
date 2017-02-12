@@ -1,8 +1,12 @@
 package com.iven.app.utils;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+
+import java.util.List;
 
 /**
  * @auth Iven
@@ -43,5 +47,23 @@ public class AppInfoUtils {
             string = getVersion(context);
         }
         return string;
+    }
+
+    /**
+     * 判断APP是前台 or 后台运行
+     *
+     * @param context Context
+     * @return true 后台运行
+     */
+    public static boolean isAPPBackground(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
+        if (!runningTasks.isEmpty()) {
+            ComponentName topActivity = runningTasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

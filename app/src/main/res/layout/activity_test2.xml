@@ -10,13 +10,15 @@
     <com.iven.app.view.FloatView
         android:id="@+id/float_view"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="300dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#33424242"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
             android:layout_width="match_parent"
@@ -24,6 +26,21 @@
             android:onClick="loadFloatViewDate"
             android:text="load"
             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color_3F51B5"
+            android:onClick="startClick"
+            android:text="start"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/value_10_px"
+            android:background="@color/color_3F51B5"
+            android:onClick="stopClick"
+            android:text="stop"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,11 +1,14 @@
 package com.iven.app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.iven.app.R;
 import com.iven.app.bean.ColumnBean;
+import com.iven.app.service.WindowService;
+import com.iven.app.tools.T;
 import com.iven.app.view.FloatView;
 
 import java.text.DecimalFormat;
@@ -48,5 +51,14 @@ public class TestActivity extends AppCompatActivity {
 
     public void loadFloatViewDate(View view) {
         float_view.setData(getData());
+    }
+
+    public void startClick(View view) {
+        T.showShort(this,"启动服务...");
+        Intent intent = new Intent(this, WindowService.class);
+        startService(intent);
+    }
+
+    public void stopClick(View view) {
     }
 }
