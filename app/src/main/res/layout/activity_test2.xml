@@ -10,8 +10,13 @@
     <com.iven.app.view.FloatView
         android:id="@+id/float_view"
         android:layout_width="match_parent"
-        android:visibility="visible"
-        android:layout_height="300dp"/>
+        android:layout_height="300dp"
+        android:visibility="gone"/>
+
+    <com.iven.app.view.CountDownAdView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
