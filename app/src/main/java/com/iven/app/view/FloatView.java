@@ -97,6 +97,9 @@ public class FloatView extends View {
 
     private void drawLine(Canvas canvas) {
         calculatePoints();
+        for (int i = 0; i < mPointFs.size(); i++) {
+            canvas.drawPoint(mPointFs.get(i).x, 200, getDefaultPaint());
+        }
 
     }
 
@@ -106,14 +109,37 @@ public class FloatView extends View {
     private void calculatePoints() {
         mPointFs.clear();
         int middleY = MARGINTOP + verticalspace * 3;
+        //计算比例
         linePath = new Path();
+        float startX, startY;
         int size = datas.size();
         for (int i = 0; i < size; i++) {
             ColumnBean columnBean = datas.get(i);
-
+            double netValue = columnBean.getNetValue();
+            int i1 = mWidth / size;
+            startX = MARGINLEFT + i1 * i;
+            startY = getY(middleY, netValue);
+            PointF pointF = new PointF();
+            pointF.x = startX;
+            pointF.y = startY;
+            mPointFs.add(pointF);
         }
 
     }
+
+    /**
+     * 计算点的Y坐标
+     *
+     * @param middleY  中轴线
+     * @param netValue 净值
+     * @return Y坐标(startY)
+     */
+    private float getY(int middleY, double netValue) {
+        //计算比例
+//        double percent = ()/;
+        return 0;
+    }
+
 
 /*    private void drawLine(Canvas canvas) {
         Paint defaultPaint = getDefaultPaint();

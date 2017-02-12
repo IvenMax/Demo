@@ -10,7 +10,7 @@
     <com.iven.app.view.FloatView
         android:id="@+id/float_view"
         android:layout_width="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="300dp"/>
 
     <LinearLayout
