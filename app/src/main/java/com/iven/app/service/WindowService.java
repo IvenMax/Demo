@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iven.app.MainActivity;
@@ -36,6 +37,7 @@ public class WindowService extends Service {
     private TextView mTextView;
     private int defaultDistance;//系统默认滑动距离
     private int lastX, lastY;
+    private LinearLayout ll_window;
 
     @Nullable
     @Override
@@ -66,6 +68,7 @@ public class WindowService extends Service {
         mLayoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         /**--初始化View--**/
         mWindowView = LayoutInflater.from(getApplication()).inflate(R.layout.layout_window, null);
+        ll_window = ((LinearLayout) mWindowView.findViewById(R.id.ll_window));
         mTextView = (TextView) mWindowView.findViewById(R.id.tv_window);
         /**将View添加到Window中**/
         mWindowManager.addView(mWindowView, mLayoutParams);
@@ -93,11 +96,10 @@ public class WindowService extends Service {
     private void setClick() {
         mTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                int action = motionEvent.getAction();
-                int x = (int) motionEvent.getX();
-                int y = (int) motionEvent.getY();
-                Log.e(TAG, "onTouch: 100" + "行 =   x = " + x + "         y = " + y);
+            public boolean onTouch(View view, MotionEvent event) {
+                int action = event.getAction();
+                int x = (int) event.getRawX();
+                int y = (int) event.getRawY();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         break;
