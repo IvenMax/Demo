@@ -11,6 +11,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
+import com.iven.app.activity.BankSearchActivity;
 import com.iven.app.activity.ChartViewActivity;
 import com.iven.app.activity.DialogUtilActivity;
 import com.iven.app.activity.FragmentHomeActivity;
@@ -98,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_gallery_viewpager://画廊效果
                 intent.setClass(this, GalleryViewPagerActivity.class);
+                break;
+            case R.id.btn_bank_search://通过银行卡号来获取对应的银行以及lOGO(只是借助支付宝的接口)
+                intent.setClass(this, BankSearchActivity.class);
                 break;
         }
         startActivity(intent);
