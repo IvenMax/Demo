@@ -3,6 +3,7 @@ package com.iven.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.iven.app.R;
@@ -40,6 +41,7 @@ public class TestActivity extends AppCompatActivity {
                 columnBean.setDate("2016-11-" + (i + 1));
             }
             list.add(columnBean);
+            Log.e(TAG, "getData: 41" + "行 = " + columnBean.toString());
         }
         return list;
     }

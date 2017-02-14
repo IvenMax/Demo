@@ -12,6 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 //    https://gold.xitu.io/post/58945a8b570c3500623081f0     ----gradle配置相关
+    //https://gold.xitu.io/post/589d1036b123db16a3c6d6d1----gradle配置相关
     buildTypes {
         release {
             minifyEnabled false

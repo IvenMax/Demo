@@ -11,7 +11,7 @@
         android:id="@+id/float_view"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <com.iven.app.view.CountDownAdView
         android:layout_width="wrap_content"

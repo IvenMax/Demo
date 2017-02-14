@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.iven.app.bean.ColumnBean;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -57,6 +58,8 @@ public class FloatView extends View {
     //点的集合
     private ArrayList<PointF> mPointFs;
     private Path linePath;
+    private float maxValue;
+    private double middleValue = 1.00;
 
     private void init() {
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);//硬件加速(三种方法，详见百度)
@@ -136,8 +139,30 @@ public class FloatView extends View {
      */
     private float getY(int middleY, double netValue) {
         //计算比例
-//        double percent = ()/;
-        return 0;
+        double percent = (middleY - netValue) / getAverageValue();
+        double v = verticalspace * percent;
+        double abs = Math.abs(middleY + v);
+        float y;
+        y = Float.parseFloat(getDecimalStyle(abs));
+        Log.e(TAG, "getY: 147" + "行 =      y     ========     " + y);
+        return y;
+    }
+
+    private String getDecimalStyle(double value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#0.0000");
+        return decimalFormat.format(value);
+    }
+
+    /**
+     * 获取平均值
+     *
+     * @return
+     */
+    private double getAverageValue() {
+        double abs = Math.abs((maxValue - middleValue));
+        double v = abs / 3;
+        Log.i(TAG, "getAverageValue:     v === " + v);
+        return v;
     }
 
 
