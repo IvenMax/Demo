@@ -38,6 +38,12 @@ public class WindowService extends Service {
     private int defaultDistance;//系统默认滑动距离
     private int lastX, lastY;
     private LinearLayout ll_window;
+    private float xInView;
+    private float yInView;
+    private float xDownInScreen;
+    private float yDownInScreen;
+    private float xInScreen;
+    private float yInScreen;
 
     @Nullable
     @Override
@@ -102,12 +108,21 @@ public class WindowService extends Service {
                 int y = (int) event.getRawY();
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
+                        xInView = event.getX();
+                        yInView = event.getY();
+                        xDownInScreen = event.getRawX();
+                        yDownInScreen = event.getRawY();
+                        xInScreen = event.getRawX();
+                        yInScreen = event.getRawY();
                         break;
                     case MotionEvent.ACTION_MOVE:
+                        xInScreen = event.getRawX();
+                        yInScreen = event.getRawY();
 
-                        if (shouldIntercept()) {
-                            mWindowManager.updateViewLayout(mWindowView, mLayoutParams);
-                        }
+                        mLayoutParams.x = (int) (xInScreen - xInView);
+                        mLayoutParams.y = (int) (yInScreen - yInView);
+                        Log.e(TAG, "onTouch: 125" + "行 = " + mLayoutParams.x + "      " + mLayoutParams.y);
+                        mWindowManager.updateViewLayout(mWindowView, mLayoutParams);
                         break;
                     case MotionEvent.ACTION_UP:
                         if (shouldIntercept()) {
