@@ -199,5 +199,11 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setAttributes(lp);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != mPowerConnectionReceiver){
+            unregisterReceiver(mPowerConnectionReceiver);
+        }
+    }
 }
