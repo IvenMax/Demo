@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
         float batteryPct = level / (float)scale;
-        Log.i(TAG, "batteryInfo: 当前电量 = "+level);
+        Log.i(TAG, "batteryInfo: 当前电量 = "+level+"%");
 
     }
 
