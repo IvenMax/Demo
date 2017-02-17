@@ -1,6 +1,8 @@
 package com.iven.app;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,14 +22,16 @@ import com.iven.app.activity.ListViewSlideActivity;
 import com.iven.app.activity.NoticeViewActivity;
 import com.iven.app.activity.PullToRefreshActivity;
 import com.iven.app.activity.TestActivity;
+import com.iven.app.activity.UpdateVersionActivity;
+import com.iven.app.activity.VDHActivity;
 import com.iven.app.activity.WebActivity;
+import com.iven.app.activity.listview.ListViewMultiplActivity;
+import com.iven.app.activity.listview.ListViewSingleActivity;
 import com.iven.app.activity.material.MaterialDesignActivity;
 import com.iven.app.activity.recyclerview.RecyclerviewActivity;
 import com.iven.app.activity.third.RealmActivity;
-import com.iven.app.activity.UpdateVersionActivity;
-import com.iven.app.activity.VDHActivity;
-import com.iven.app.activity.listview.ListViewMultiplActivity;
-import com.iven.app.activity.listview.ListViewSingleActivity;
+import com.iven.app.receiver.PowerConnectionReceiver;
+import com.iven.app.utils.Common;
 
 /**
  * Android Studio使用技巧---http://www.jianshu.com/p/8accfeefc182
@@ -35,11 +39,17 @@ import com.iven.app.activity.listview.ListViewSingleActivity;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "zpy_MainActivity";
     private ImageView iv_circle;
+    private PowerConnectionReceiver mPowerConnectionReceiver;
+    private boolean isCharging;//是否正在充电
+    private boolean usbCharge;//是否是USB形式充电
+    private boolean acCharge;//是否是直流电形式充电
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        aboutBattery();
         iv_circle = (ImageView) findViewById(R.id.iv_circle);
         iv_circle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +57,50 @@ public class MainActivity extends AppCompatActivity {
                 startAnim();
             }
         });
+    }
+
+    /**
+     * 电池相关
+     */
+    private void aboutBattery() {
+        //检测是否在充电 以及什么形式的充电
+        batteryInfo();
+        registerMyReceiver();
+    }
+
+    private void registerMyReceiver() {
+        //检测是否充电
+        mPowerConnectionReceiver = new PowerConnectionReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Common.ACTION_POWER_CHANGE);
+        registerReceiver(mPowerConnectionReceiver, intentFilter);
+        Intent intent = new Intent(Common.ACTION_POWER_CHANGE);
+        intent.putExtra("isCharging",isCharging);
+        intent.putExtra("usbCharge",usbCharge);
+        intent.putExtra("acCharge",acCharge);
+        sendBroadcast(intent);
+
+    }
+
+    /**
+     * 检测当前是否在充电  以及 是以什么形式充电(USB or AC)
+     */
+    private void batteryInfo() {
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = this.registerReceiver(null, intentFilter);
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+        Log.i(TAG, "batteryChargeing: isCharging = " + isCharging);
+        int chargePlug = batteryStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+        acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
+        Log.i(TAG, "batteryChargeing: usbCharge = " + usbCharge + "       acCharge = " + acCharge);
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+        float batteryPct = level / (float)scale;
+        Log.i(TAG, "batteryInfo: 当前电量 = "+level);
+
     }
 
     public void btnClick(View view) {
@@ -143,21 +197,6 @@ public class MainActivity extends AppCompatActivity {
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         getWindow().setAttributes(lp);
-        bubbleSort();
-    }
-
-    private void bubbleSort() {
-        int score[] = {67, 69, 75, 87, 89, 90, 99, 100};
-        for (int i = 0; i < score.length - 1; i++) {
-            for (int j = 0; j < score.length - i - 1; j++) {
-                int temp = score[j];
-                score[j] = score[1+j];
-                score[1+j] = temp;
-            }
-        }
-        for (int i = 0; i < score.length; i++) {
-            Log.e(TAG, "bubbleSort: 154" + "行 = " +score[i]);
-        }
     }
 
 

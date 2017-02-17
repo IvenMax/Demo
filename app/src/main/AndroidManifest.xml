@@ -3,8 +3,11 @@
           package="com.iven.app">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACTION_POWER_CONNECTED"/>
+    <uses-permission android:name="android.permission.ACTION_POWER_DISCONNECTED"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
         android:name=".MyApp"
