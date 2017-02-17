@@ -31,6 +31,7 @@ import com.iven.app.activity.material.MaterialDesignActivity;
 import com.iven.app.activity.recyclerview.RecyclerviewActivity;
 import com.iven.app.activity.third.RealmActivity;
 import com.iven.app.receiver.PowerConnectionReceiver;
+import com.iven.app.service.FloatWindowService;
 import com.iven.app.utils.Common;
 
 /**
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         aboutBattery();
+        //启动悬浮球
+        Intent intent = new Intent(MainActivity.this, FloatWindowService.class);
+        startService(intent);
         iv_circle = (ImageView) findViewById(R.id.iv_circle);
         iv_circle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction(Common.ACTION_POWER_CHANGE);
         registerReceiver(mPowerConnectionReceiver, intentFilter);
         Intent intent = new Intent(Common.ACTION_POWER_CHANGE);
-        intent.putExtra("isCharging",isCharging);
-        intent.putExtra("usbCharge",usbCharge);
-        intent.putExtra("acCharge",acCharge);
+        intent.putExtra("isCharging", isCharging);
+        intent.putExtra("usbCharge", usbCharge);
+        intent.putExtra("acCharge", acCharge);
         sendBroadcast(intent);
 
     }
@@ -98,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
         int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
         int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
-        float batteryPct = level / (float)scale;
-        Log.i(TAG, "batteryInfo: 当前电量 = "+level+"%");
+        float batteryPct = level / (float) scale;
+        Log.i(TAG, "batteryInfo: 当前电量 = " + level + "%");
 
     }
 
@@ -202,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (null != mPowerConnectionReceiver){
+        if (null != mPowerConnectionReceiver) {
             unregisterReceiver(mPowerConnectionReceiver);
         }
     }

@@ -66,11 +66,16 @@
         </activity>
         <activity android:name=".activity.GalleryViewPagerActivity">
         </activity>
-        <!-- 服务，注册 -->
-        <service android:name=".service.WindowService"/>
 
         <activity android:name=".activity.BankSearchActivity">
         </activity>
+
+
+
+
+        <!-- 服务，注册 -->
+        <service android:name=".service.WindowService"/>
+        <service android:name=".service.FloatWindowService"/>
     </application>
 
 </manifest>
