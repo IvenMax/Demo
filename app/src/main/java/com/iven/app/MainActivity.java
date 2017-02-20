@@ -36,6 +36,7 @@ import com.iven.app.utils.Common;
 
 /**
  * Android Studio使用技巧---http://www.jianshu.com/p/8accfeefc182
+ * test
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "zpy_MainActivity";
