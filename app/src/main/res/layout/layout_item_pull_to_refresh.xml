@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
+        android:visibility="gone"
         android:src="@mipmap/ic_launcher"
         />
 
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/value_24_px"
         android:layout_toRightOf="@id/iv_pull_to_refresh"
         android:gravity="center"
         android:text="1234566789"
