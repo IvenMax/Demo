@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,16 +13,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.view.animation.Transformation;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.iven.app.R;
 import com.iven.app.tools.SizeUtils;
 
 import java.security.InvalidParameterException;
@@ -32,7 +27,7 @@ public class PullToRefreshLayout extends ViewGroup {
 
     private static final int UNLIMIT_DRAG_HEIGHT = 0;
     private static final int LIMIT_DRAG_HEIGHT = 1;
-    private static final int DRAG_MAX_DISTANCE = 500;
+    private static final int DRAG_MAX_DISTANCE = 120;
     private int mDragMode = LIMIT_DRAG_HEIGHT;
     /**
      * 下拉拖拽阻尼
@@ -41,7 +36,7 @@ public class PullToRefreshLayout extends ViewGroup {
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
 
     public static final int STYLE_SUN = 0;
-    public static final int MAX_OFFSET_ANIMATION_DURATION = 600;
+    public static final int MAX_OFFSET_ANIMATION_DURATION = 300;
 
     private static final int INVALID_POINTER = -1;
 
@@ -76,12 +71,6 @@ public class PullToRefreshLayout extends ViewGroup {
     //    private int mTargetPaddingRight;
     //    private int mTargetPaddingLeft;
     private int finishRefreshToPauseDuration = 50;
-    private TextView image_circle;
-    private TextView image_logo;
-    private float scrollTop;
-    private boolean alphaFlag = true;
-    private TextView textview;
-    private float alpha;
 
     public PullToRefreshLayout(Context context) {
         this(context, null);
@@ -97,7 +86,6 @@ public class PullToRefreshLayout extends ViewGroup {
 
         addView(mRefreshView);
 
-        setRefreshView(0);
         //在构造函数上加上这句，防止自定义View的onDraw方法不执行的问题
         setWillNotDraw(false);
         ViewCompat.setChildrenDrawingOrderEnabled(this, true);
@@ -121,17 +109,7 @@ public class PullToRefreshLayout extends ViewGroup {
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         mRefreshView.setLayoutParams(layoutParams);
-
-
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_head, mRefreshView, true);
-        image_circle = (TextView) view.findViewById(R.id.image_circle);
-        image_logo = (TextView) view.findViewById(R.id.image_logo);
-        image_circle.setAlpha(0);
-        image_logo.setAlpha(0);
-
-
-        return view;
-
+        return LayoutInflater.from(getContext()).inflate(layoutId, mRefreshView, true);
     }
 
 
@@ -163,9 +141,7 @@ public class PullToRefreshLayout extends ViewGroup {
         mTarget.measure(widthMeasureSpec, heightMeasureSpec);
         mRefreshView.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
 
-        mTotalDragDistance = (int) (mRefreshView.getMeasuredHeight() * 0.7f);
-
-
+        mTotalDragDistance = (int) (mRefreshView.getMeasuredHeight() * 0.8f);
     }
 
     private void ensureTarget() {
@@ -221,8 +197,6 @@ public class PullToRefreshLayout extends ViewGroup {
                 mInitialMotionY = initialMotionY;
                 break;
             case MotionEvent.ACTION_MOVE:
-
-                // mRefreshView.getHeight()-
                 if (mActivePointerId == INVALID_POINTER) {
                     return false;
                 }
@@ -230,10 +204,7 @@ public class PullToRefreshLayout extends ViewGroup {
                 if (y == -1) {
                     return false;
                 }
-
-
                 final float yDiff = y - mInitialMotionY;
-                //                Log.e(TAG, "onInterceptTouchEvent: ydiff" + yDiff);
                 //如果是滑动动作，将标志mIsBeingDragged置为true
                 if (yDiff > mTouchSlop && !mIsBeingDragged) {
                     boolean isNull = view != null;
@@ -291,35 +262,7 @@ public class PullToRefreshLayout extends ViewGroup {
                 final float y = MotionEventCompat.getY(ev, pointerIndex);
                 final float yDiff = y - mInitialMotionY;
                 //未松手前,总共下拉的距离 float
-                scrollTop = yDiff * DRAG_RATE;
-
-
-                int half = mRefreshView.getHeight() / 2;
-                float diffY = mRefreshView.getHeight() - (half + 20);
-                if (scrollTop > half && Math.abs(scrollTop - (half + 20)) < diffY) {
-                    float value = scrollTop - (half + 20);
-                    float alpha = value / diffY;
-                    if (alpha > 0.8f) {
-                        alpha = 1.0f;
-                    }
-                    //                    if (alpha < 0.2f) {
-                    //                        alpha = 0f;
-                    //                    }
-                    alpha = alpha > 1.0f ? 1.0f : alpha < 0 ? 0 : alpha;
-
-                    image_logo.setAlpha(alpha);
-                    if (alpha == 1.0f) {
-                        image_circle.setAlpha(1.0f);
-                    } else {
-                        image_circle.setAlpha(0.0f);
-                    }
-
-                    //                    Log.e(TAG, "onTouchEvent: alpha = " + alpha);
-                }
-
-                int three = mRefreshView.getHeight() / 3;
-                float three_diffy = mRefreshView.getHeight() - (three + 20);
-
+                final float scrollTop = yDiff * DRAG_RATE;
                 if (mCurrentDragPercent < 0) {
                     return false;
                 }
@@ -333,8 +276,6 @@ public class PullToRefreshLayout extends ViewGroup {
                     float tensionPercent = (float) ((tensionSlingshotPercent / 4) - Math.pow((tensionSlingshotPercent / 4), 2)) * 2f;
                     float extraMove = (slingshotDist) * tensionPercent / 2;
                     targetY = (int) ((slingshotDist * boundedDragPercent) + extraMove);
-
-
                 } else {
                     targetY = (int) scrollTop; //效果一样,但可以无限下拉
                 }
@@ -350,7 +291,6 @@ public class PullToRefreshLayout extends ViewGroup {
             //做多指触控处理
             case MotionEventCompat.ACTION_POINTER_DOWN:
                 //将最后一只按下的手指作为ActivePointer
-
                 final int index = MotionEventCompat.getActionIndex(ev);
                 mActivePointerId = MotionEventCompat.getPointerId(ev, index);
                 break;
@@ -359,8 +299,6 @@ public class PullToRefreshLayout extends ViewGroup {
                 break;
             //手指松开！
             case MotionEvent.ACTION_UP:
-                alphaFlag = true;
-                Log.e(TAG, "onTouchEvent: 手指松开");
             case MotionEvent.ACTION_CANCEL: {
                 //排除是无关手指
                 if (mActivePointerId == INVALID_POINTER) {
@@ -374,8 +312,7 @@ public class PullToRefreshLayout extends ViewGroup {
                 mIsBeingDragged = false;
                 mActivePointerId = INVALID_POINTER;
 
-                if (overScrollTop > mTotalDragDistance && image_circle.getAlpha() == 1.0f) {//触发刷新
-                    Log.e(TAG, "onTouchEvent: 我要刷新");
+                if (overScrollTop > mTotalDragDistance) {//触发刷新
                     setRefreshing(true, true);
                 } else {//回滚
                     animateOffsetToStartPosition();
@@ -385,79 +322,6 @@ public class PullToRefreshLayout extends ViewGroup {
             }
         }
         return true;//该系列点击事件未处理完，消耗此系列事件
-    }
-
-    private Boolean isStart = true;
-    long duration = 800;
-
-    int count = 0;
-
-    void addAnimation_2() {
-        RotateAnimation rotate = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-
-        rotate.setDuration(500);
-        rotate.setRepeatCount(-1);
-        Interpolator interpolator = new LinearInterpolator();
-
-        rotate.setInterpolator(interpolator);
-        rotate.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Log.e(TAG, "onAnimationEnd: 我停止了");
-
-            }
-
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-                if (isStart) {
-                    duration -= 200;
-                    if (duration <= 300) {
-                        duration = 300;
-                    }
-                }
-                //                } else {
-                //                    Log.e(TAG, "onAnimationRepeat: 准备停止");
-                //                    duration += 300;
-                //                    if (duration > 800) {
-                //                        duration = 800;
-                //                        //在这里执行减速完成回滚动画
-                //                        animation.setRepeatCount(0);
-                //
-                ////                        isStart = true;
-                //
-                //                        mRefreshView.postDelayed(new Runnable() {
-                //                            @Override
-                //                            public void run() {
-                //
-                //                                image_circle.clearAnimation();
-                //                                image_logo.clearAnimation();
-                //                                image_circle.setVisibility(GONE);
-                //                                image_logo.setVisibility(GONE);
-                //                                animateOffsetToStartPosition();
-                //                                // alphaFlag = true;
-                //                            }
-                //                        }, 0);
-                //
-                //
-                //                    }
-                //                }
-                //
-                animation.setDuration(duration);
-            }
-        });
-        image_circle.startAnimation(rotate);
-
-    }
-
-    private void stopAnimation() {
-        isStart = false;
     }
 
     /**
@@ -538,7 +402,7 @@ public class PullToRefreshLayout extends ViewGroup {
 
     public void setRefreshing(boolean refreshing) {
         if (mRefreshing != refreshing) {
-            setRefreshing(refreshing, false);
+            setRefreshing(refreshing, true /* notify */);
         }
 
     }
@@ -554,38 +418,20 @@ public class PullToRefreshLayout extends ViewGroup {
             mRefreshing = refreshing;
             if (mRefreshing) {
                 //开始刷新
-
                 animateOffsetToCorrectPosition();//位置上调到合适的位置
-                isStart = true;
-                addAnimation_2();
-                //                mRefreshView.postDelayed(new Runnable() {
-                //                    @Override
-                //                    public void run() {
-                //                        Log.e(TAG, "setRefreshing: 开始刷新");
-                //
-                //
-                //                    }
-                //                }, 0);
-
-
             } else {
-                alphaFlag = true;
                 //刷新完成
                 if (mListener != null)
                     mListener.onFinish();
-                // stopAnimation();
                 mRefreshView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        stopAnimation();
-                        image_circle.clearAnimation();
                         animateOffsetToStartPosition();
                     }
                 }, 0);
             }
         }
     }
-
 
     private Animation.AnimationListener mToStartListener = new Animation.AnimationListener() {
         @Override
@@ -599,8 +445,6 @@ public class PullToRefreshLayout extends ViewGroup {
         @Override
         public void onAnimationEnd(Animation animation) {
             mCurrentOffsetTop = mTarget.getTop();//更新mCurrentOffsetTop
-            image_circle.setAlpha(0);
-            image_logo.setAlpha(0);
         }
     };
 
@@ -702,7 +546,7 @@ public class PullToRefreshLayout extends ViewGroup {
         mRefreshView.layout(left, top - mRefreshView.getMeasuredHeight() + mCurrentOffsetTop, left + width - right, top + mCurrentOffsetTop - bottom);
     }
 
-    public void setOnRefreshListener(OnRefreshListenerAdapter listener) {
+    public void setOnRefreshListener(PullToRefreshLayout.OnRefreshListenerAdapter listener) {
         mListener = listener;
     }
 
