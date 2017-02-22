@@ -16,10 +16,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        release {
+        debug {
             minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         // 修改打包的app名
