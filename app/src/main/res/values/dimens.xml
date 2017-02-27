@@ -18,4 +18,5 @@
     <dimen name="value_4_px">4px</dimen>
     <dimen name="value_600_px">600px</dimen>
     <dimen name="value_56_px">56px</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
 </resources>

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ll_act_test"
+    android:background="@color/bottom_select_no"
     android:orientation="vertical"
     tools:context="com.iven.app.activity.TestActivity">
 
@@ -18,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#33424242"
-        android:gravity="center"
+        android:gravity="top"
+        android:layout_marginTop="@dimen/value_24_px"
         android:orientation="vertical">
 
         <Button
@@ -26,6 +29,12 @@
             android:layout_height="wrap_content"
             android:onClick="loadFloatViewDate"
             android:text="load"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="stopDj"
+            android:text="stop"
             />
 
     </LinearLayout>

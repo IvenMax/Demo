@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.iven.app.R;
+import com.iven.app.adapter.MyRecyclerAdapter;
 import com.iven.app.bean.ColumnBean;
+import com.iven.app.view.BouncingMenu;
 import com.iven.app.view.FloatView;
 
 import java.text.DecimalFormat;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 public class TestActivity extends AppCompatActivity {
     private static final String TAG = "zpy_TestActivity";
     private FloatView float_view;
+    private BouncingMenu mBouncingMenu;
 
 
     @Override
@@ -22,7 +25,12 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test2);
         float_view = (FloatView) findViewById(R.id.float_view);
-        float_view.setData(getData());
+        ArrayList<String> datas = new ArrayList();
+        for (int i = 0; i < 30; i++) {
+            datas.add("item   "+i);
+        }
+        MyRecyclerAdapter adapter = new MyRecyclerAdapter(datas);
+        mBouncingMenu = BouncingMenu.makeMenu(findViewById(R.id.ll_act_test),R.layout.layout_bounch_sv,adapter);
     }
 
     public ArrayList<ColumnBean> getData() {
@@ -49,6 +57,12 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void loadFloatViewDate(View view) {
-        float_view.setData(getData());
+//        float_view.setData(getData());
+
+        mBouncingMenu.show();
+    }
+
+    public void stopDj(View view) {
+        mBouncingMenu.dismiss();
     }
 }
