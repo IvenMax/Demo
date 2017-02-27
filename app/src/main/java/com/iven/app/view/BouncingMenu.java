@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.iven.app.R;
 import com.iven.app.adapter.MyRecyclerAdapter;
@@ -21,6 +22,7 @@ import com.iven.app.adapter.MyRecyclerAdapter;
  */
 
 public class BouncingMenu {
+    private static final String TAG = "zpy_BouncingMenu";
     private ViewGroup mParentVG;
     private View rootView;
     private BouncingView bouncingView;
@@ -38,8 +40,17 @@ public class BouncingMenu {
         bouncingView.setAnimationListener(new myAnimationListener());
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        //        recyclerView.setAdapter(adapter);
+        mAdapter.setOnItemClickLitener(new MyRecyclerAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(rootView.getContext(), "click...", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(rootView.getContext(), "long click...", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**

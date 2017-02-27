@@ -21,7 +21,6 @@
         android:layout_height="match_parent"
         android:background="#33424242"
         android:gravity="top"
-        android:layout_marginTop="@dimen/value_24_px"
         android:orientation="vertical">
 
         <Button

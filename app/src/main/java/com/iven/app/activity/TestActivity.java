@@ -31,6 +31,7 @@ public class TestActivity extends AppCompatActivity {
         }
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(datas);
         mBouncingMenu = BouncingMenu.makeMenu(findViewById(R.id.ll_act_test),R.layout.layout_bounch_sv,adapter);
+        mBouncingMenu.show();
     }
 
     public ArrayList<ColumnBean> getData() {
