@@ -1,5 +1,6 @@
 package com.iven.app.view;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
+import com.iven.app.animator.ChartAnimator;
 import com.iven.app.bean.ColumnBean;
 import com.iven.app.tools.T;
 
@@ -32,7 +34,7 @@ import static java.lang.String.format;
  */
 
 public class ChartView extends View {
-    private static final String TAG = "zpy_ChartView";
+    private static final String TAG = "dah_ChartView";
     private ArrayList<ColumnBean> list = new ArrayList<>();//数据集合
     private Context mContext;
     //边界线的颜色(灰色)
@@ -77,6 +79,9 @@ public class ChartView extends View {
     private int dateIndex;
     private int locationIndex;//十字线左边位置x
 
+    private ChartAnimator mAnimator;
+    //动画延时
+    private int mDuriation = 1000;
 
     public ChartView(Context context) {
         super(context);
@@ -147,7 +152,8 @@ public class ChartView extends View {
             //计算每个柱的高度
             double value = list.get(i).getValue();//每个柱的数值
             double persent = value / averageValue;//按照比例实现
-            double endY = Math.abs(persent * verticalSpace);
+            double realBarHeight = persent * mAnimator.getPhaseY();
+            double endY = Math.abs(realBarHeight * verticalSpace);
             if (value < 0) {//正负数
                 paint.setColor(Color.parseColor(GREENCOLOR));
                 endY = center + endY;
@@ -229,7 +235,7 @@ public class ChartView extends View {
         //日期
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setColor(Color.parseColor(TEXTCOLOR));
-        canvas.drawText(date, left + HORIZONTALSPACE, MARGINTOP + hight+HORIZONTALSPACE+10, paint);
+        canvas.drawText(date, left + HORIZONTALSPACE, MARGINTOP + hight + HORIZONTALSPACE + 10, paint);
     }
 
     /**
@@ -330,6 +336,14 @@ public class ChartView extends View {
         defaultDistance = ViewConfiguration.get(context).getScaledEdgeSlop();
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);//关闭硬件加速(三种方法，详见百度)
         mGestureDetector = new GestureDetector(mContext, new MyGestureListener());
+        //初始化动画
+        mAnimator = new ChartAnimator(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                postInvalidate();
+            }
+        });
     }
 
     /**
@@ -462,6 +476,7 @@ public class ChartView extends View {
      */
     private void calculateLongPressLocation(int dx) {
         locationIndex = (int) ((dx - HORIZONTALSPACE / 2) / (columnWidth + HORIZONTALSPACE));
+        Log.e(TAG, "calculateLongPressLocation: locationIndex === " + locationIndex);
         if (locationIndex > dateIndex + list.size() - 1) {
             locationIndex = list.size() - 1;
         } else if (locationIndex < dateIndex) {
@@ -473,8 +488,6 @@ public class ChartView extends View {
             locationIndex = 0;
         }
         postInvalidate();
-
-
     }
 
     /**---------------------------------对外方法-------------------------**/
@@ -486,8 +499,11 @@ public class ChartView extends View {
     public void setData(ArrayList<ColumnBean> list) {
         this.list = list;
         hasData = true;
+        mAnimator.animateY(mDuriation);
         postInvalidate();
     }
+
+
 }
 
 /*    protected void drawTextWithBG(float x, float y, String str, Paint paint, Canvas canvas) {
